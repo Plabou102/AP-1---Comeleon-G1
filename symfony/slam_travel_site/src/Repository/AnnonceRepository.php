@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Nom;
+use App\Entity\Annonce;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Nom>
+ * @extends ServiceEntityRepository<Annonce>
  */
-class NomRepository extends ServiceEntityRepository
+class AnnonceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Nom::class);
+        parent::__construct($registry, Annonce::class);
     }
 
     //    /**
-    //     * @return Nom[] Returns an array of Nom objects
+    //     * @return Annonce[] Returns an array of Annonce objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('n.id', 'ASC')
+    //            ->orderBy('a.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Nom
+    //    public function findOneBySomeField($value): ?Annonce
     //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

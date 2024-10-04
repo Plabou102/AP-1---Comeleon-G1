@@ -1,13 +1,21 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\DBAL\Types\Types;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
 {
+
+    #[ORM\OneToMany(targetEntity: Annonce::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    
+    #[ORM\OneToMany(targetEntity: Avis::class)]
+    #[ORM\JoinColumn(nullable: false)]
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

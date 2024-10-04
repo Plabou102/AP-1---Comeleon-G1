@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\DBAL\Types\Types;
 
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 class Avis
 {
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(nullable: false)]
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,6 +26,9 @@ class Avis
 
     #[ORM\Column]
     private ?int $noteavis = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateavis = null;
 
     public function getId(): ?int
     {
@@ -59,6 +67,18 @@ class Avis
     public function setNoteavis(int $noteavis): static
     {
         $this->noteavis = $noteavis;
+
+        return $this;
+    }
+
+    public function getDateavis(): ?\DateTimeInterface
+    {
+        return $this->dateavis;
+    }
+
+    public function setDateavis(\DateTimeInterface $dateavis): static
+    {
+        $this->dateavis = $dateavis;
 
         return $this;
     }
