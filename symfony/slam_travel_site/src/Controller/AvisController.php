@@ -38,9 +38,12 @@ class AvisController extends AbstractController
 
         return $this->render('avis/index.html.twig', [
             'controller_name' => 'AvisController',
+            'page_title' => 'Avis'
         ]);
     }
 }
+
+
 
 
 
