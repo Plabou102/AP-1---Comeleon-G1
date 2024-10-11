@@ -3,6 +3,13 @@
 {% block title %}Avis Client{% endblock %}
 
 {% block body %}
+
+
+<header class="header">
+{% include 'nav.html.twig' %}
+</header>
+
+<div class="page-background">
     <h1>Laissez votre avis !</h1>
 
     <form action="{{ path('app_avis') }}" method="POST">
@@ -23,7 +30,7 @@
 
         <button type="submit">Soumettre</button>
     </form>
-
+</div>
     {% if app.request.method == 'POST' %}
         <p>Merci pour votre avis !</p>
     {% endif %}

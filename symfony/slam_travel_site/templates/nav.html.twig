@@ -48,11 +48,15 @@
 
     <!-- Nom de la page au centre -->
     <div class="page-title">
-        Accueil
+        {{ page_title }}
     </div>
 
     <!-- Liens de navigation avec images à droite -->
     <nav class="nav-links">
+        <a href="{{ path('app_accueil') }}">
+            <img src="{{ asset('images/accueil.png') }}" alt="Accueil Icon"> Accueil
+        </a>
+
         <a>
             <img src="{{ asset('images/i.png') }}" alt="Informations Icon"> Informations
         </a>
