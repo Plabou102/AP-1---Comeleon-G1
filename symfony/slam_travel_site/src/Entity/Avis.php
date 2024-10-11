@@ -12,6 +12,7 @@ class Avis
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
     #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

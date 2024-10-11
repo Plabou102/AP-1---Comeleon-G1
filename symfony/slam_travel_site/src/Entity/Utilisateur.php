@@ -9,11 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Utilisateur
 {
 
-    #[ORM\OneToMany(targetEntity: Annonce::class)]
+    #[ORM\OneToMany(targetEntity: Annonce::class, mappedBy: 'utilisateur')]
     #[ORM\JoinColumn(nullable: false)]
+    private $annonces;
     
-    #[ORM\OneToMany(targetEntity: Avis::class)]
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'utilisateur')]
     #[ORM\JoinColumn(nullable: false)]
+    private $avis;
 
 
     #[ORM\Id]

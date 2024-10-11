@@ -12,6 +12,7 @@ class Annonce
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
     #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,7 +24,7 @@ class Annonce
 
     #[ORM\Column]
     private ?int $nbmaxpersonne = null;
-
+    
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datedepart = null;
 

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis Client{% endblock %}
+
+{% block body %}
+    <h1>Laissez votre avis !</h1>
+
+    <form action="{{ path('app_avis') }}" method="POST">
+        <div>
+            <label for="auteuravis">Auteur :</label>
+            <input type="text" id="auteuravis" name="auteuravis" required>
+        </div>
+
+        <div>
+            <label for="descriptionavis">Description :</label>
+            <textarea id="descriptionavis" name="descriptionavis" required></textarea>
+        </div>
+
+        <div>
+            <label for="noteavis">Note :</label>
+            <input type="number" id="noteavis" name="noteavis" min="1" max="5" required>
+        </div>
+
+        <button type="submit">Soumettre</button>
+    </form>
+
+    {% if app.request.method == 'POST' %}
+        <p>Merci pour votre avis !</p>
+    {% endif %}
+{% endblock %}
+
+
