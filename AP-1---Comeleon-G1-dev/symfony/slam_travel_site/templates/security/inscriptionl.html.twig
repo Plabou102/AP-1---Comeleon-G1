@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PieceController!{% endblock %}
+
+{% block body %}
+<div class="pageConnexion" style="background-image: url('{{ asset('assets/ImageAvion.jpg') }}'); background-size: cover; background-position: center; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;">
+
+    <h1>Ajouter une pièce</h1>
+    
+    {% include "security/Inscription.html.twig" %}
+
+</div>
+{% endblock %}
