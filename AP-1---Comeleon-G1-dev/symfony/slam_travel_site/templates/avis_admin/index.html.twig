@@ -234,9 +234,9 @@
                     <p>{{ avis.descriptionavis }}</p>
                     <span class="note">Note : {{ avis.noteavis }}/5</span>
                     <p>Date : {{ avis.dateavis|date('d/m/Y') }}</p>
-
-                    <form action="{{ path('app_avis_admin', { id: avis.id }) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
+                    <form action="{{ path('app_avis_admin_delete', { id: avis.id }) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
                         <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avis.id) }}">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>
                 </div>

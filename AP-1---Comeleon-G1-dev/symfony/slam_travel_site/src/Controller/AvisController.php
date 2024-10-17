@@ -1,14 +1,15 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Avis;
 use App\Repository\AvisRepository;
-use Doctrine\ORM\EntityManagerInterface; 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request; 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
+
 
 class AvisController extends AbstractController
 {
@@ -18,28 +19,41 @@ class AvisController extends AbstractController
         $avisList = $avisRepository->findAll();
 
         if ($request->isMethod('POST')) {
-            $auteuravis = $request->request->get('auteuravis');
             $descriptionavis = $request->request->get('descriptionavis');
             $noteavis = $request->request->get('noteavis');
 
-            $avis = new Avis();
-            $avis->setAuteuravis($auteuravis);
-            $avis->setDescriptionavis($descriptionavis);
-            $avis->setNoteavis($noteavis);
-            $avis->setDateavis(new \DateTime()); 
+            $user = $this->getUser();
 
-            $entityManager->persist($avis);
-            $entityManager->flush();
+            if ($user) {
+                $avis = new Avis();
+                $avis->setDescriptionavis($descriptionavis);
+                $avis->setNoteavis($noteavis);
+                $avis->setDateavis(new \DateTime());
 
-            return $this->redirectToRoute('app_voir_avis');
+
+                $username = $user->getUsername();
+                $avis->setAuteuravis($username);
+
+                $entityManager->persist($avis);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_voir_avis');
+            } else {
+                return $this->redirectToRoute('app_login');
+            }
         }
 
         return $this->render('avis/index.html.twig', [
             'controller_name' => 'AvisController',
             'page_title' => 'Avis',
+            'avis_list' => $avisList
         ]);
     }
 }
+
+
+
+
 
 
 
