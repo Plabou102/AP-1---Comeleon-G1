@@ -1,19 +1,14 @@
 <?php
 
 namespace App\Entity;
-use Doctrine\DBAL\Types\Types;
 
+use Doctrine\DBAL\Types\Types;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 class Avis
 {
-
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -30,6 +25,10 @@ class Avis
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateavis = null;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: false, onDelete: "CASCADE")]
+    private ?Utilisateur $user = null; 
 
     public function getId(): ?int
     {
@@ -83,4 +82,17 @@ class Avis
 
         return $this;
     }
+
+    public function getUser(): ?Utilisateur
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Utilisateur $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
+

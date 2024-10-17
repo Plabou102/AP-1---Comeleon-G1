@@ -1,9 +1,6 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Avis Client{% endblock %}
-
 {% block body %}
 <style>
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -50,7 +47,7 @@
         margin-bottom: 5px; 
     }
 
-    /* Style pour la barre de navigation */
+
 .navbar {
     position: relative;
     z-index: 1000; 
@@ -61,106 +58,127 @@
     align-items: center;
 }
 
-
 .page-background {
     position: relative;
     background-image: url('{{ asset("images/background.png") }}');
-    background-size: 100%; /* Ou utilisez '100% auto' si vous préférez ajuster la largeur */
-    background-position: center center; /* Centre l'image */
-    background-repeat: no-repeat; /* Évite la répétition */
-    height: 100vh; /* Occupe toute la hauteur de l'écran */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centre verticalement le contenu */
-    align-items: center; /* Centre horizontalement le contenu */
-    text-align: center;
-    color: white;
-}
-
-
-/* Texte superposé à l'image */
-.overlay-text {
-    z-index: 1; /* Assure que le texte est au-dessus de l'image */
-    color: white;
-    text-align: center;
-    margin-bottom: 50px; /* Ajoute un espace entre le texte et les boutons */
-    flex-direction: column;
-}
-
-.overlay-text h1 {
-    font-size: 48px;
-    margin-bottom: 20px; /* Espacement entre le titre et les boutons */
-    flex-direction: column;
-}
-
-.overlay-text p {
-    font-size: 24px;
-    max-width: 10px;
-    flex-direction: column;
-}
-
-/* Section des boutons avec description */
-.button-section {
-    display: flex;
     justify-content: center;
-    gap: 40px; /* Espace entre chaque bouton */
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group {
+    display: flex
+    padding: 50px;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
-/* Conteneur pour chaque bouton */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 200px; /* Limite la largeur du texte pour chaque bouton */
-}
-
-.button-container p:last-child {
-    max-width: 180px; /* Limite la largeur du paragraphe explicatif */
-    margin-top: 10px;
-    font-size: 14px;
+.btn-red {
+    background-color: red;
     color: white;
-    line-height: 1.4; /* Augmente la lisibilité du texte */
+    border: none;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Style des boutons ronds */
-.round-button {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour effet de relief */
-    transition: transform 0.3s ease; /* Animation au survol */
-}
-
-.round-button img {
-    max-width: 140px;
-    max-height: 140px;
-}
-
-
-.round-button:hover {
-    transform: scale(1.1);
-}
-
-
-.button-container p {
-    margin-top: 10px;
-    font-size: 16px;
+.btn-green {
+    background-color: #28a745;
     color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.btn-red:hover {
+    background-color: darkred;
+}
 
+.btn-green:hover {
+    background-color: #218838;
+}
+
+p {
+    font-size: 1.3rem;
+    color: #28a745;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
 </style>
 
 
 <header class="header">
 {% include 'nav.html.twig' %}
 </header>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title><?php echo $pageTitle; ?></title>
+</head>
 
 <div class="page-background">
     <h1>Laissez votre avis !</h1>
@@ -181,10 +199,14 @@
             <input type="number" id="noteavis" name="noteavis" min="1" max="5" required>
         </div>
 
-        <button type="submit">Soumettre</button>
+        <div class="button-group">
+            <button type="submit" class="btn-green">Soumettre</button>
+            <a href="{{ path('app_voir_avis') }}">
+                <button type="button" class="btn-red">Retour aux avis</button>
+            </a>
+        </div>
     </form>
 </div>
-
     {% if app.request.method == 'POST' %}
         <p>Merci pour votre avis !</p>
     {% endif %}
