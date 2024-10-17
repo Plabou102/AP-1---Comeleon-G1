@@ -10,9 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Annonce
 {
 
-    //#[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    //#[ORM\JoinColumn(nullable: false)]
-    //private $user;
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

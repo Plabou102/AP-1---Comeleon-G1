@@ -97,7 +97,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        // Retourne les rôles de l'utilisateur, par défaut ROLE_USER
         return array_unique(array_merge($this->roles, ['ROLE_USER']));
     }
 
@@ -110,12 +109,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->username; // Retourne l'username comme identifiant unique
+        return $this->username;
     }
 
     public function eraseCredentials(): void
     {
-        // Efface les informations sensibles, par exemple, un mot de passe non-haché
+
     }
 
 

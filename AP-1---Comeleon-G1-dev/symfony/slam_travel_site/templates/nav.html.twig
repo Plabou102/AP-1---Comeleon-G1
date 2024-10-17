@@ -38,47 +38,34 @@
     margin-bottom: 4px;
 }
 </style>
-   
-    <!-- Logo à gauche -->
+
     <div class="logo">
         <a>
             <img src="{{ asset('images/logo_slam_travel.png') }}" alt="Logo"> 
         </a>
     </div>
 
-    <!-- Nom de la page au centre -->
     <div class="page-title">
         {{ page_title }}
     </div>
 
-    <!-- Liens de navigation avec images à droite -->
     <nav class="nav-links">
         <a href="{{ path('app_accueil') }}">
             <img src="{{ asset('images/accueil.png') }}" alt="Accueil Icon"> Accueil
         </a>
-
         <a>
             <img src="{{ asset('images/i.png') }}" alt="Informations Icon"> Informations
         </a>
         <a>
             <img src="{{ asset('images/voyage.png') }}" alt="Voyage Icon"> Voyage
         </a>
-        <a href="{{ path('app_avis') }}">
+        <a href="{{ path('app_voir_avis') }}">
             <img src="{{ asset('images/avis.png') }}" alt="Avis Icon"> Avis
         </a>
         <a>
             <img src="{{ asset('images/contact.png') }}" alt="Contact Icon"> Contact
         </a>
-        <a href="/login">
-            <img src="{{ asset('images/connexion.png') }}" alt="Connexion Icon"> 
-            
-            {% if app.user %}
-                <div class="mb-3">
-                    {{ app.user.userIdentifier }}
-                </div>
-            {% else %}
-            Connexion
-            {% endif %}
+        <a href="{{ path('app_login') }}">
+            <img src="{{ asset('images/connexion.png') }}" alt="Connexion Icon"> Connexion
         </a>
     </nav>
-    
