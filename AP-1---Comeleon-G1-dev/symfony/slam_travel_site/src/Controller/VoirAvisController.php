@@ -20,7 +20,7 @@ class VoirAvisController extends AbstractController
 
         return $this->render('voir_avis/index.html.twig', [
             'controller_name' => 'VoirAvisController',
-            'page_title' => 'Liste Avis',
+            'page_title' => 'Liste des avis',
             'avisList' => $avisList,
         ]);
     }
