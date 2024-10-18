@@ -54,6 +54,9 @@
             <img src="{{ asset('images/accueil.png') }}" alt="Accueil Icon"> Accueil
         </a>
         <a>
+            <img src="{{ asset('images/i.png') }}" alt="Informations Icon"> Informations
+        </a>
+        <a href="{{ path('app_annonce') }}"> 
             <img src="{{ asset('images/voyage.png') }}" alt="Voyage Icon"> Voyage
         </a>
     {% if is_granted('ROLE_ADMIN') %}
@@ -68,7 +71,13 @@
         <a>
             <img src="{{ asset('images/contact.png') }}" alt="Contact Icon"> Contact
         </a>
+    {% if app.user %}
+        <a href="{{ path('app_login') }}">
+            <img src="{{ asset('images/connexion.png') }}" alt="Connexion Icon"> {{ app.user.userIdentifier }}
+        </a>
+    {% else %}
         <a href="{{ path('app_login') }}">
             <img src="{{ asset('images/connexion.png') }}" alt="Connexion Icon"> Connexion
         </a>
+    {% endif %}
     </nav>

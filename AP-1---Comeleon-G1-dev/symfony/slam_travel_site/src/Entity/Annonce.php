@@ -9,11 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 class Annonce
 {
-
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -39,9 +34,6 @@ class Annonce
 
     #[ORM\Column(length: 255)]
     private ?string $descriptionannonce = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $lienphoto = null;
 
     public function getId(): ?int
     {
@@ -128,18 +120,6 @@ class Annonce
     public function setDescriptionannonce(string $descriptionannonce): static
     {
         $this->descriptionannonce = $descriptionannonce;
-
-        return $this;
-    }
-
-    public function getLienphoto(): ?string
-    {
-        return $this->lienphoto;
-    }
-
-    public function setLienphoto(string $lienphoto): static
-    {
-        $this->lienphoto = $lienphoto;
 
         return $this;
     }

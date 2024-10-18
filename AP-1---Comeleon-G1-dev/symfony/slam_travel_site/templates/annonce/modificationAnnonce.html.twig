@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'annonce{% endblock %}
+
+{% block body %}
+<style>
+.centered-title {
+    text-align: center;
+}
+</style>
+
+<h1 class="centered-title">Modification de l'annonce</h1>
+    {% include "annonce/ajoutAnnonce.html.twig" with {'button_label' : 'Modifier'} %}
+
+{% endblock %}
+ 
