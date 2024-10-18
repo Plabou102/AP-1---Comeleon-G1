@@ -27,7 +27,7 @@ class Avis
     private ?\DateTimeInterface $dateavis = null;
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: false, onDelete: "CASCADE")]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id", nullable: true, onDelete: "CASCADE")]
     private ?Utilisateur $user = null; 
 
     public function getId(): ?int
