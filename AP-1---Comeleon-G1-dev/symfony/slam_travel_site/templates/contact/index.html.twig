@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f8f8;
+        padding: 10px;
+    }
+    .logo {
+        flex: 1;
+    }
+    .logo img {
+        max-height: 100px; 
+    }
+    .page-title {
+        flex: 2;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .nav-links {
+        flex: 3;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .nav-links a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #333;
+        margin: 0 10px;
+        display: flex;
+        flex-direction: column; /* Arrange l'image et le texte en colonne */
+        align-items: center;    /* Centre l'image et le texte */
+        text-align: center;     /* Centre le texte sous l'image */
+    }
+    .nav-links img {
+        max-height: 60px;
+        margin-bottom: 5px; /* Espace entre l'image et le texte */
+    }
+
+    /* Style pour la barre de navigation */
+.navbar {
+    position: relative; /* La barre de navigation ne sera pas affectée par l'image de fond */
+    z-index: 1000; /* Assure que la barre de navigation est au-dessus de tout */
+    background-color: #f8f8f8;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style pour l'image de fond de la page d'accueil */
+.page-background {
+    position: relative;
+    background-image: url('{{ asset("images/background.png") }}'); /* Utilisez le chemin correct vers votre image */
+    background-size: cover; /* L'image couvre toute la page */
+    background-position: center;
+    height: 100vh; /* Hauteur de toute la page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Texte superposé à l'image de fond */
+.overlay-text {
+    position: relative;
+    z-index: 1; /* S'assurer que le texte est au-dessus de l'image de fond */
+    color: white;
+    text-align: center;
+}
+
+.overlay-text h1 {
+    font-size: 40px;
+    margin-bottom: 100px;
+}
+
+.overlay-text p {
+    font-size: 24px;
+}
+
+</style>
+
+
+<header class="header">
+{% include 'nav.html.twig' %}
+</header>
+
+    <div class="page-background">
+        <div class="overlay-text">
+            <h1>Contactez nous</h1>
+    {{ form_start(form) }}
+        {{ form_label(form.Prenom) }}
+        {{ form_widget(form.Prenom) }}
+   
+        {{ form_label(form.Nom) }}
+        {{ form_widget(form.Nom) }}
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date) }}
+        {{ form_label(form.Motif) }}
+        {{ form_widget(form.Motif) }}
+        {{ form_rest(form) }}
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+        </div>
+    </div>
+
+
+  
+{% endblock %}
+
+
+
+
