@@ -37,6 +37,7 @@
     max-height: 60px;
     margin-bottom: 4px;
 }
+
 </style>
 
     <div class="logo">
@@ -54,14 +55,18 @@
             <img src="{{ asset('images/accueil.png') }}" alt="Accueil Icon"> Accueil
         </a>
         <a>
-            <img src="{{ asset('images/i.png') }}" alt="Informations Icon"> Informations
-        </a>
-        <a>
             <img src="{{ asset('images/voyage.png') }}" alt="Voyage Icon"> Voyage
         </a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_avis_admin') }}">
+            <img src="{{ asset('images/avis.png') }}" alt="Admin Icon"> Gestion Avis
+        </a>
+    {% else %}
         <a href="{{ path('app_voir_avis') }}">
             <img src="{{ asset('images/avis.png') }}" alt="Avis Icon"> Avis
         </a>
+    {% endif %}
+        <a>
         <a href="{{ path('contact') }}">
             <img src="{{ asset('images/contact.png') }}" alt="Contact Icon"> Contact
         </a>

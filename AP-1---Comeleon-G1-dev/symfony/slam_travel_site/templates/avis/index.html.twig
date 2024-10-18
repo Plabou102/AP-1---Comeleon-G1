@@ -86,6 +86,7 @@ form {
 label {
     font-weight: bold;
     color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 5);
 }
 
 input, textarea {
@@ -183,29 +184,25 @@ p {
 <div class="page-background">
     <h1>Laissez votre avis !</h1>
 
-    <form action="{{ path('app_avis') }}" method="POST">
-        <div>
-            <label for="auteuravis">Auteur :</label>
-            <input type="text" id="auteuravis" name="auteuravis" required>
-        </div>
+<form action="{{ path('app_avis') }}" method="POST">
+    <div>
+        <label for="descriptionavis">Description :</label>
+        <textarea id="descriptionavis" name="descriptionavis" required></textarea>
+    </div>
 
-        <div>
-            <label for="descriptionavis">Description :</label>
-            <textarea id="descriptionavis" name="descriptionavis" required></textarea>
-        </div>
+    <div>
+        <label for="noteavis">Note :</label>
+        <input type="number" id="noteavis" name="noteavis" min="1" max="5" required>
+    </div>
 
-        <div>
-            <label for="noteavis">Note :</label>
-            <input type="number" id="noteavis" name="noteavis" min="1" max="5" required>
-        </div>
+    <div class="button-group">
+        <button type="submit" class="btn-green">Soumettre</button>
+        <a href="{{ path('app_voir_avis') }}">
+            <button type="button" class="btn-red">Retour aux avis</button>
+        </a>
+    </div>
+</form>
 
-        <div class="button-group">
-            <button type="submit" class="btn-green">Soumettre</button>
-            <a href="{{ path('app_voir_avis') }}">
-                <button type="button" class="btn-red">Retour aux avis</button>
-            </a>
-        </div>
-    </form>
 </div>
     {% if app.request.method == 'POST' %}
         <p>Merci pour votre avis !</p>
