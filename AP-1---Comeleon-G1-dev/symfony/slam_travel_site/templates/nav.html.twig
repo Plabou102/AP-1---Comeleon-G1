@@ -1,0 +1,81 @@
+   <style>
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+
+.navbar .logo {
+    flex: 1;
+}
+
+.navbar .logo img {
+    max-height: 100px; 
+}
+
+.navbar .nav-links {
+    flex: 3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar .nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.navbar .nav-links img {
+    max-height: 60px;
+    margin-bottom: 4px;
+}
+
+</style>
+
+    <div class="logo">
+        <a>
+            <img src="{{ asset('images/logo_slam_travel.png') }}" alt="Logo"> 
+        </a>
+    </div>
+
+    <div class="page-title">
+        {{ page_title }}
+    </div>
+
+    <nav class="nav-links">
+        <a href="{{ path('app_accueil') }}">
+            <img src="{{ asset('images/accueil.png') }}" alt="Accueil Icon"> Accueil
+        </a>
+        <a href="{{ path('app_annonce') }}"> 
+            <img src="{{ asset('images/voyage.png') }}" alt="Voyage Icon"> Voyage
+        </a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_avis_admin') }}">
+            <img src="{{ asset('images/avis.png') }}" alt="Admin Icon"> Gestion Avis
+        </a>
+    {% else %}
+        <a href="{{ path('app_voir_avis') }}">
+            <img src="{{ asset('images/avis.png') }}" alt="Avis Icon"> Avis
+        </a>
+    {% endif %}
+        <a href="{{ path('contact') }}">
+            <img src="{{ asset('images/contact.png') }}" alt="Contact Icon"> Contact
+        </a>
+    {% if app.user %}
+        <a href="{{ path('app_login') }}">
+            <img src="{{ asset('images/connexion.png') }}" alt="Connexion Icon"> {{ app.user.userIdentifier }}
+        </a>
+    {% else %}
+        <a href="{{ path('app_login') }}">
+            <img src="{{ asset('images/connexion.png') }}" alt="Connexion Icon"> Connexion
+        </a>
+    {% endif %}
+    </nav>

@@ -1,0 +1,212 @@
+{% block body %}
+<style>
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100vh;
+}
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f8f8;
+        padding: 10px;
+    }
+    .logo {
+        flex: 1;
+    }
+    .logo img {
+        max-height: 100px; 
+    }
+    .page-title {
+        flex: 2;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .nav-links {
+        flex: 3;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .nav-links a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #333;
+        margin: 0 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;    
+        text-align: center;   
+    }
+    .nav-links img {
+        max-height: 60px;
+        margin-bottom: 5px; 
+    }
+
+
+.navbar {
+    position: relative;
+    z-index: 1000; 
+    background-color: #f8f8f8;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-background {
+    position: relative;
+    background-image: url('{{ asset("images/background.png") }}');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 5);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group {
+    display: flex
+    padding: 50px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-red {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-green {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red:hover {
+    background-color: darkred;
+}
+
+.btn-green:hover {
+    background-color: #218838;
+}
+
+p {
+    font-size: 1.3rem;
+    color: #28a745;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
+</style>
+
+
+<header class="header">
+{% include 'nav.html.twig' %}
+</header>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title><?php echo $pageTitle; ?></title>
+</head>
+
+<div class="page-background">
+    <h1>Laissez votre avis !</h1>
+
+<form action="{{ path('app_avis') }}" method="POST">
+    <div>
+        <label for="descriptionavis">Description :</label>
+        <textarea id="descriptionavis" name="descriptionavis" required></textarea>
+    </div>
+
+    <div>
+        <label for="noteavis">Note :</label>
+        <input type="number" id="noteavis" name="noteavis" min="1" max="5" required>
+    </div>
+
+    <div class="button-group">
+        <button type="submit" class="btn-green">Soumettre</button>
+        <a href="{{ path('app_voir_avis') }}">
+            <button type="button" class="btn-red">Retour aux avis</button>
+        </a>
+    </div>
+</form>
+
+</div>
+    {% if app.request.method == 'POST' %}
+        <p>Merci pour votre avis !</p>
+    {% endif %}
+{% endblock %}
+
+

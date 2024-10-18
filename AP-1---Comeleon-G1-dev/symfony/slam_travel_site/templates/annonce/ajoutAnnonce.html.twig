@@ -1,0 +1,82 @@
+
+{% block body %}
+<style>
+/* Global Form Styling */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Form Row Styling */
+form .form-row {
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+/* Input Field Styling */
+form input[type="text"], form input[type="number"], form input[type="date"], form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+}
+
+form input[type="text"]:focus, form input[type="number"]:focus, form input[type="date"]:focus, form textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+
+/* Button Styling */
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* Optional: Style for Textarea */
+form textarea {
+    resize: vertical;
+    height: 150px;
+}
+</style>
+
+{{form_start(AnnonceType)}}
+    {{form_row(AnnonceType.paysannonce)}}
+    {{form_row(AnnonceType.villeannonce)}}
+    {{form_row(AnnonceType.descriptionannonce)}}
+    {{form_row(AnnonceType.nbmaxpersonne)}}
+    {{form_row(AnnonceType.datedepart)}}
+    {{form_row(AnnonceType.dateretour)}}
+    {{form_row(AnnonceType.prixannonce)}}
+    <button type="submit">{{button_label | default('Ajouter')}}</button>
+{{form_end(AnnonceType)}}
+
+{% endblock %}
