@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyages{% endblock %}
+
+{% block body %}
+<style>
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f8f8;
+        padding: 10px;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    .logo img {
+        max-height: 100px; 
+    }
+
+    .page-title {
+        flex: 2;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        flex: 3;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #333;
+        margin: 0 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;    
+        text-align: center;   
+    }
+
+    .nav-links img {
+        max-height: 60px;
+        margin-bottom: 5px; 
+    }
+
+    .navbar {
+        position: relative;
+        z-index: 1000; 
+        background-color: #f8f8f8;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page-background {
+        position: relative;
+        background-image: url('{{ asset("images/background.png") }}');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        text-align: center;
+        color: white;
+        flex-direction: column; 
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .container {
+        padding: 30px;
+        border-radius: 15px;
+        max-height: 70vh;
+        overflow-y: auto;
+        width: 500px;
+        margin: 0px auto;
+        max-width: 90%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: transparent;
+    }
+
+    .annonce {
+        list-style: none;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #333;
+    }
+
+    .annonce li {
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .message {
+        color: black;
+        font-size: 40px; /* Taille de police augmentée */
+        text-align: center;
+        width: 100%; /* Occupe toute la largeur */
+        height: 100%; /* Occupe toute la hauteur */
+        display: flex; /* Utilise flexbox pour centrer */
+        justify-content: center; /* Centre horizontalement */
+        align-items: center; /* Centre verticalement */
+    }
+
+        .button-container {
+        display: flex; /* Utilise flexbox pour centrer */
+        justify-content: center; /* Centre horizontalement */
+        margin-top: 20px; /* Ajoute un espacement supérieur */
+    }
+
+        .buttons-wrapper {
+        display: flex; /* Utilise flexbox pour centrer les boutons */
+        justify-content: center; /* Centre horizontalement */
+        gap: 10px; /* Espacement entre les boutons */
+        margin-top: 15px; /* Espacement supérieur */
+    }
+</style>
+
+<header class="header">
+    {% include 'nav.html.twig' %}
+</header>
+
+<div class="page-background">
+    <div class="container" style="background-color: rgba(255, 255, 255, 0.8); padding: 30px; border-radius: 15px; max-width: 800px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        {% if is_granted('ROLE_ADMIN') %}
+            {% for lAnnonce in lesAnnonces %}
+                <ul class="annonce">
+                    <li><strong>Prix :</strong> {{lAnnonce.prixAnnonce}} €</li>
+                    <li><strong>Pour :</strong> {{lAnnonce.nbmaxpersonne}} personnes</li>
+                    <li><strong>Départ :</strong> {{lAnnonce.datedepart|date('Y-m-d')}}</li>
+                    <li><strong>Retour :</strong> {{lAnnonce.dateretour|date('Y-m-d')}}</li>
+                    <li><strong>Pays :</strong> {{lAnnonce.paysAnnonce}}</li>
+                    <li><strong>Ville :</strong> {{lAnnonce.villeAnnonce}}</li>
+                    <li><strong>Description :</strong> {{lAnnonce.descriptionannonce}}</li>
+                                        <li class="buttons-wrapper">
+                        <form action="{{ path('app_modificationAnnonce', {'id': lAnnonce.id}) }}" method="get">
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                        </form>
+                        <form action="{{ path('app_supprimerAnnonce', {'id': lAnnonce.id}) }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ lAnnonce.id) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+
+        <div class="button-container">
+            <form action="{{ path('app_ajoutAnnonce') }}" method="get">
+                <button type="submit" class="btn btn-success" style="padding: 40px 30px; font-size: 20px;">Ajouter une annonce</button>
+            </form>
+        {% elseif is_granted('ROLE_USER') %}
+            {% for lAnnonce in lesAnnonces %}
+                <ul class="annonce">
+                    <li><strong>Prix :</strong> {{lAnnonce.prixAnnonce}} €</li>
+                    <li><strong>Pour :</strong> {{lAnnonce.nbmaxpersonne}} personnes</li>
+                    <li><strong>Du :</strong> {{lAnnonce.datedepart|date('Y-m-d')}}</li>
+                    <li><strong>Au :</strong> {{lAnnonce.dateretour|date('Y-m-d')}}</li>
+                    <li><strong>Pays :</strong> {{lAnnonce.paysAnnonce}}</li>
+                    <li><strong>Ville :</strong> {{lAnnonce.villeAnnonce}}</li>
+                    <li><strong>Description :</strong> {{lAnnonce.descriptionannonce}}</li>
+                </ul>
+            {% endfor %}
+        </div>  
+        {% else %}
+            <div class="message">
+                <h1>Connectez-vous pour voir les voyages disponibles</h1>
+            </div>
+        {% endif %}
+    
+{% endblock %}
